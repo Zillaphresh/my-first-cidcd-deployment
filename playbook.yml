@@ -1,8 +1,9 @@
 ---
 - hosts: web
   become: true
+  user: ubuntu
   become_method: sudo
-  remote_user: ubuntu
+  become_user: root
   roles:
   - dependencies
   - prepare
