@@ -2,8 +2,6 @@
 - hosts: web
   become: true
   user: ubuntu
-  become_method: sudo
-  become_user: root
   roles:
   - dependencies
   - prepare
