@@ -47,6 +47,6 @@ jobs:
 workflows:
   my_workflow:
     jobs:
-      - configure_infractructure:
+      - configure_infractructure
         
       
