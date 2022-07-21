@@ -33,7 +33,7 @@ jobs:
       - run:
           name: configure ansible playbook
           command: |
-            sudo ansible-playbook  -i inventory.ini playbook.yml 
+            ansible-playbook  -i inventory.ini playbook.yml 
   smoke_test:
     docker:
       - image: alpine:latest
