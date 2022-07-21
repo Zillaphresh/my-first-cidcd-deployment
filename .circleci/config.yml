@@ -37,7 +37,7 @@ jobs:
       - run:
           name: configure ansible playbook
           command: |
-            ansible-playbook -vvv --user=ubuntu -i inventory.txt playbook.yml 
+            ansible-playbook  -i inventory.txt playbook.yml 
 
 
 
@@ -47,5 +47,8 @@ jobs:
 workflows:
   my_workflow:
     jobs:
-      - configure_infractructure
+      - create_infrastructure
+      - configure_infractructure:
+          requires:
+            - create_infrastructure
       
