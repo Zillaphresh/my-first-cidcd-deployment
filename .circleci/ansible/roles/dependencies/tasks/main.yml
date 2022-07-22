@@ -1,2 +1,14 @@
 ---
 # tasks file for apache
+  - name: Update server
+    apt:
+      update_cache: yes
+  - name: Upgrade
+    apt:
+      name: "*"
+      update_cache: yes
+  - name: Install dependencies
+    apt:
+      name: [npm,nodejs, pm2]
+      state: latest
+      
