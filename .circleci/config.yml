@@ -36,7 +36,7 @@ jobs:
       - checkout
       - add_ssh_keys:
           fingerprints: 
-            - "7e:99:8e:04:32:7d:d4:20:cb:b7:85:93:67:4f:a4:7a"
+            - "07:9d:e5:b0:e3:90:0b:25:10:04:88:ed:09:03:3e:06"
       - run:
           name: install Ansible
           command: |
@@ -45,7 +45,7 @@ jobs:
           name: configure ansible playbook
           command: |
             ansible-playbook  -i inventory.txt playbook.yaml 
-      - destroy_environment
+      
     
   smoke_test:
     docker:
@@ -63,7 +63,7 @@ jobs:
             else
               return 1
             fi
-      - destroy_environment
+      
 
 
 
