@@ -44,7 +44,7 @@ jobs:
       - run:
           name: configure ansible playbook
           command: |
-            ansible-playbook  -i inventory.txt playbook.yaml 
+            ansible-playbook  -i inventory.txt ansible/playbook.yaml 
       - destroy_environment
     
   smoke_test:
