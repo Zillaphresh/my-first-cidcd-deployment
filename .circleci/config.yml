@@ -41,10 +41,11 @@ jobs:
           name: install Ansible
           command: |
             apk add --update ansible
+      -run: ansible -i inventory web -m ping --user=ubuntu
       - run:
           name: configure ansible playbook
           command: |
-            ansible-playbook  -i inventory.txt playbook.yaml 
+            ansible-playbook  -i inventory.txt --user=ubuntu playbook.yaml 
       
     
   smoke_test:
