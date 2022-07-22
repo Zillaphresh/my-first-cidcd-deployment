@@ -33,6 +33,7 @@ jobs:
   configure_infractructure:
     docker:
       - image: python:3.7-alpine3.11
+      - image: circleci/aws-cli@2.0.3
     steps:
       - checkout
       - add_ssh_keys:
@@ -46,6 +47,7 @@ jobs:
           name: configure ansible playbook
           command: |
             ansible-playbook  -i inventory.ini playbook.yml 
+      - destroy_environment
     
   smoke_test:
     docker:
