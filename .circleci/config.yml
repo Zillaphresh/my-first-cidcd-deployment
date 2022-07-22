@@ -46,7 +46,7 @@ jobs:
           name: configure ansible playbook
           command: |
             ansible-playbook  -i inventory.ini playbook.yml 
-      - destroy_environment
+    
   smoke_test:
     docker:
       - image: alpine:latest
