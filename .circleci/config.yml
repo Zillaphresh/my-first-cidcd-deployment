@@ -41,7 +41,7 @@ jobs:
           name: install Ansible
           command: |
             apk add --update ansible
-      - run: ansible -i inventory.txt web -m ping --user=ubuntu
+      - run: ansible -i inventory.txt web -m ping --user=ubuntu --private-key webserver.pem
       - run:
           name: configure ansible playbook
           command: |
