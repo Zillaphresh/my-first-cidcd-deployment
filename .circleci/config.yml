@@ -38,7 +38,7 @@ jobs:
           fingerprints: 
             - "ae:79:45:06:35:79:18:7d:65:25:cc:95:c4:35:3c:c7"
       - run:
-          name: install Python
+          name: install Python3
           command: |
             apk add  python3
       - run: ansible -i inventory.txt web -m ping 
