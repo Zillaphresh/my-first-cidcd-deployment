@@ -4,19 +4,29 @@ version: 2.1
 
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
+commands:
+  destroy_environment:
+    steps:
+      - run:
+          name: Destroy environment
+          when: on_fail:
+          command: |
+            aws cloudformation delete-stack --stack-name myStack-${CIRCLE_WORKFLOW_ID:0:5}
+
 jobs:
-  # create_infrastructure:
-  #   docker:
-  #     - image: amazon/aws-cli
-  #   steps:
-  #     - checkout
-  #     - run:
-  #         name: "Create cloud Formation stack"
-  #         command: |
-  #           aws cloudformation deploy \
-  #               --template-file template.yml \
-  #               --stack-name myStack-${CIRCLE_WORKFLOW_ID:0:5} \
-  #               --region us-east-1
+  create_infrastructure:
+    docker:
+      - image: amazon/aws-cli
+    steps:
+      - checkout
+      - run:
+          name: "Create cloud Formation stack"
+          command: |
+            aws cloudformation deploy \
+                --template-file template.yml \
+                --stack-name myStack-${CIRCLE_WORKFLOW_ID:0:5} \
+                --region us-east-1
+      - destroy_environment
 
   configure_infractructure:
     docker:
@@ -34,6 +44,7 @@ jobs:
           name: configure ansible playbook
           command: |
             ansible-playbook  -i inventory.ini playbook.yml 
+      - destroy_environment
   smoke_test:
     docker:
       - image: alpine:latest
@@ -50,6 +61,7 @@ jobs:
             else
               return 1
             fi
+      - destroy_environment
 
 
 
@@ -58,6 +70,7 @@ jobs:
 workflows:
   my_workflow:
     jobs:
+      - create_infrastructure
       - configure_infractructure
       - smoke_test
 
