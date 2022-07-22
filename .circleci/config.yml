@@ -41,7 +41,7 @@ jobs:
           name: install Python3
           command: |
             apt-get install  python
-      - run: ansible -i inventory.txt web -m ping --user=ubuntu
+      - run: ansible -i inventory.txt web -m ping 
       - run:
           name: configure ansible playbook
           command: |
