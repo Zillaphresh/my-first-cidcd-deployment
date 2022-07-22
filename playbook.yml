@@ -1,8 +1,0 @@
----
-- hosts: web
-  user: ubuntu
-  become_method: sudo
-  become: true
-  roles:
-  - dependencies
-  - prepare
