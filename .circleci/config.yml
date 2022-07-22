@@ -70,10 +70,12 @@ jobs:
 workflows:
   my_workflow:
     jobs:
-      - create_infrastructure:
+      - create_infrastructure
+      - configure_infractructure
           requires:
-            - configure_infractructure
-            - smoke_test
+            - create_infrastructure
+      - smoke_test
+            
 
         
       
