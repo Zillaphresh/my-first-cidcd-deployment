@@ -31,16 +31,16 @@ jobs:
 
   configure_infractructure:
     docker:
-      - image: python:3.7-alpine3.11
+      - image: webdevops/ansible
     steps:
       - checkout
       - add_ssh_keys:
           fingerprints: 
             - "ae:79:45:06:35:79:18:7d:65:25:cc:95:c4:35:3c:c7"
-      - run:
-          name: install Ansible
-          command: |
-            apk add --update ansible
+      # - run:
+      #     name: install Ansible
+      #     command: |
+      #       apk add --update ansible
       - run: ansible -i inventory.txt web -m ping --user=ubuntu --private-key webserver.pem
       - run:
           name: configure ansible playbook
