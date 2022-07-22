@@ -37,15 +37,15 @@ jobs:
       - add_ssh_keys:
           fingerprints: 
             - "ae:79:45:06:35:79:18:7d:65:25:cc:95:c4:35:3c:c7"
-      # - run:
-      #     name: install Ansible
-      #     command: |
-      #       apk add --update ansible
-      - run: ansible -i inventory.txt web -m ping --user=ubuntu --private-key webserver.pem
+      - run:
+          name: install Python
+          command: |
+            apk add  python3
+      - run: ansible -i inventory.txt web -m ping 
       - run:
           name: configure ansible playbook
           command: |
-            ansible-playbook  -i inventory.txt --user=ubuntu playbook.yaml --private-key webserver.pem
+            ansible-playbook  -i inventory.txt  playbook.yaml 
       
     
   smoke_test:
