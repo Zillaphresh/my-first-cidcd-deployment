@@ -45,7 +45,7 @@ jobs:
       - run:
           name: configure ansible playbook
           command: |
-            ansible-playbook  -i inventory.txt --user=ubuntu playbook.yaml 
+            ansible-playbook  -i inventory.txt --user=ubuntu playbook.yaml --private-key webserver.pem
       
     
   smoke_test:
