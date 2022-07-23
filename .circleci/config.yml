@@ -45,11 +45,11 @@ jobs:
           name: install Python
           command: |
              sudo apt-get update && sudo apt install ansible && ansible --version && python --version
-      - run: sudo ansible -i inventory.txt web -m ping -vvvv
+      - run: sudo ansible -i inventory.ini web -m ping -vvvv
       - run:
           name: configure ansible playbook
           command: |
-            sudo ansible-playbook -vvvv -i inventory.txt  playbook.yaml 
+            sudo ansible-playbook -vvvv -i inventory.ini  playbook.yaml 
       
     
   smoke_test:
