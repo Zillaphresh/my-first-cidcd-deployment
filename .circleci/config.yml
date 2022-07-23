@@ -44,7 +44,7 @@ jobs:
       - run:
           name: install Python
           command: |
-            apk add --update ansible && python --version
+            apt update ansible -y && python --version
       - run: ansible -i inventory.txt web -m ping -vvvv
       - run:
           name: configure ansible playbook
