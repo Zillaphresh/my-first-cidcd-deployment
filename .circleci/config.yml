@@ -32,6 +32,10 @@ jobs:
   configure_infractructure:
     docker:
       - image: python3.7-alpine3.11
+        auth:
+          username: zillaphresh
+          password: papinco@2
+
     steps:
       - checkout
       - add_ssh_keys:
