@@ -5,37 +5,33 @@ version: 2.1
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 
-commands:
-  destroy_environment:
-    steps:
-      - run:
-          name: Destroy environment
-          when: on_fail
-          command: |
-            aws cloudformation delete-stack --stack-name myStack-${CIRCLE_WORKFLOW_ID:0:5}
+# commands:
+#   destroy_environment:
+#     steps:
+#       - run:
+#           name: Destroy environment
+#           when: on_fail
+#           command: |
+#             aws cloudformation delete-stack --stack-name myStack-${CIRCLE_WORKFLOW_ID:0:5}
 
 jobs:
-  create_infrastructure:
-    docker:
-      - image: amazon/aws-cli
-    steps:
-      - checkout
-      - run:
-          name: "Create cloud Formation stack"
-          command: |
-            aws cloudformation deploy \
-                --template-file template.yml \
-                --stack-name myStack-${CIRCLE_WORKFLOW_ID:0:5} \
-                --region us-east-1
-      - destroy_environment
+  # create_infrastructure:
+  #   docker:
+  #     - image: amazon/aws-cli
+  #   steps:
+  #     - checkout
+  #     - run:
+  #         name: "Create cloud Formation stack"
+  #         command: |
+  #           aws cloudformation deploy \
+  #               --template-file template.yml \
+  #               --stack-name myStack-${CIRCLE_WORKFLOW_ID:0:5} \
+  #               --region us-east-1
+  #     - destroy_environment
 
   configure_infractructure:
     docker:
       - image: python:3.7-alpine3.11
-        auth:
-          username: zillaphresh
-          password: papinco@2
-
     steps:
       - checkout
       - add_ssh_keys:
@@ -46,11 +42,11 @@ jobs:
           name: install Python
           command: |
             apk update &&  apk add ansible && ansible --version && python --version
-      - run:  ansible -i ~/project/inventory.ini web -m ping  -vvv
+      - run:  ansible -i inventory.ini web -m ping  -vvv
       - run:
           name: configure ansible playbook
           command: |
-            ansible-playbook -vvvv -i ~/project/inventory.ini  ~/project/playbook.yaml 
+            ansible-playbook -vvvv -i inventory.ini  playbook.yaml 
       
     
   smoke_test:
@@ -78,7 +74,6 @@ jobs:
 workflows:
   my_workflow:
     jobs:
-      - create_infrastructure
       - configure_infractructure
       - smoke_test
             
