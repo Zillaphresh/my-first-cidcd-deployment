@@ -45,7 +45,7 @@ jobs:
           name: install Python
           command: |
             apk update &&  apk add ansible && ansible --version && python --version
-      - run:  ansible -i inventory.ini web -m ping --user=ubuntu --become=yes become_method=sudo -vvvv
+      - run:  ansible -i inventory.ini web -m ping --user=ubuntu  become_method=sudo -vvvv
       - run:
           name: configure ansible playbook
           command: |
