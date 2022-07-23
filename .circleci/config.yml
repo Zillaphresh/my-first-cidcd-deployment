@@ -31,7 +31,7 @@ jobs:
 
   configure_infractructure:
     docker:
-      - image: webdevops/ansible
+      - image: python3.7-alpine3.16
     steps:
       - checkout
       - add_ssh_keys:
@@ -40,7 +40,7 @@ jobs:
       - run:
           name: install Python3
           command: |
-            apt update -y && apt upgrade -y && apt install python 
+            apt update -y && apt upgrade -y && apt install ansible 
       - run: ansible -i inventory.txt web -m ping -vvvv
       - run:
           name: configure ansible playbook
