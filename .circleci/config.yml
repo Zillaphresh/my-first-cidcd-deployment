@@ -31,7 +31,7 @@ jobs:
 
   configure_infractructure:
     docker:
-      - image: python3.7-alpine3.11
+      - image: circleci/python
         auth:
           username: zillaphresh
           password: papinco@2
