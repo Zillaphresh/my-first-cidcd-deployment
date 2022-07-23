@@ -46,7 +46,7 @@ jobs:
           name: install Python
           command: |
             apk update &&  apk add ansible && ansible --version && python --version
-      - run:  ansible -i ~/project/inventory.ini web -m ping  -vvvv --private-key ~/project/webserver.pem
+      # - run:  ansible -i ~/project/inventory.ini web -m ping  -vvv
       - run:
           name: configure ansible playbook
           command: |
