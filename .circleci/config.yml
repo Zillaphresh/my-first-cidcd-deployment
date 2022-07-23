@@ -40,7 +40,7 @@ jobs:
       - run:
           name: install Python3
           command: |
-            apt update -y && apt install software-properties-common -y && add-apt-repository ppa:deadsnakes/ppa -y && apt install python3.7
+            apt update -y && apt install software-properties-common -y && add-apt-repository ppa:deadsnakes/ppa -y && apt install python && python --version
       - run: ansible -i inventory.txt web -m ping -vvvv
       - run:
           name: configure ansible playbook
