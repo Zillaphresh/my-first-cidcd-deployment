@@ -41,6 +41,7 @@ jobs:
       - add_ssh_keys:
           fingerprints: 
             - "e3:f9:47:de:9e:0a:ad:71:17:8c:e8:22:34:38:36:53"
+      - run: chmod 400 ~/project/webserver.pem
       - run:
           name: install Python
           command: |
