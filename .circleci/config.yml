@@ -45,11 +45,11 @@ jobs:
           name: install Python
           command: |
             apk update &&  apk add ansible && ansible --version && python --version
-      - run:  ansible -i inventory.ini web -m ping  -vvvv --private-key ~/project/webserver.pem
+      - run:  ansible -i ~/project/inventory.ini web -m ping  -vvvv --private-key ~/project/webserver.pem
       - run:
           name: configure ansible playbook
           command: |
-            sudo ansible-playbook -vvvv -i inventory.ini  playbook.yaml 
+            sudo ansible-playbook -vvvv -i ~/project/inventory.ini  ~/project/playbook.yaml 
       
     
   smoke_test:
