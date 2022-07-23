@@ -15,19 +15,19 @@ commands:
             aws cloudformation delete-stack --stack-name myStack-${CIRCLE_WORKFLOW_ID:0:5}
 
 jobs:
-  # create_infrastructure:
-  #   docker:
-  #     - image: amazon/aws-cli
-  #   steps:
-  #     - checkout
-  #     - run:
-  #         name: "Create cloud Formation stack"
-  #         command: |
-  #           aws cloudformation deploy \
-  #               --template-file template.yml \
-  #               --stack-name myStack-${CIRCLE_WORKFLOW_ID:0:5} \
-  #               --region us-east-1
-  #     - destroy_environment
+  create_infrastructure:
+    docker:
+      - image: amazon/aws-cli
+    steps:
+      - checkout
+      - run:
+          name: "Create cloud Formation stack"
+          command: |
+            aws cloudformation deploy \
+                --template-file template.yml \
+                --stack-name myStack-${CIRCLE_WORKFLOW_ID:0:5} \
+                --region us-east-1
+      - destroy_environment
 
   configure_infractructure:
     docker:
@@ -46,7 +46,7 @@ jobs:
           name: install Python
           command: |
             apk update &&  apk add ansible && ansible --version && python --version
-      # - run:  ansible -i ~/project/inventory.ini web -m ping  -vvv
+      - run:  ansible -i ~/project/inventory.ini web -m ping  -vvv
       - run:
           name: configure ansible playbook
           command: |
@@ -78,6 +78,7 @@ jobs:
 workflows:
   my_workflow:
     jobs:
+      - create_infrastructure
       - configure_infractructure
       - smoke_test
             
