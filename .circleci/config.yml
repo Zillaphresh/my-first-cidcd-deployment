@@ -31,7 +31,7 @@ jobs:
 
   configure_infractructure:
     docker:
-      - image: circleci/python3.7
+      - image: python:3.7-alpine3.11
         auth:
           username: zillaphresh
           password: papinco@2
@@ -44,7 +44,7 @@ jobs:
       - run:
           name: install Python
           command: |
-             sudo apt-get update && sudo apt install ansible && ansible --version && python --version
+             sudo apk update && sudo apk add ansible && ansible --version && python --version
       - run: sudo ansible -i inventory.ini web -m ping --user=ubuntu -vvvv
       - run:
           name: configure ansible playbook
