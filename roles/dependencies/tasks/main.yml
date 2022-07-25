@@ -12,10 +12,12 @@
       name: [npm,nodejs]
       state: latest
   - name: "install pm2"
-    become: true
-    shell: npm install pm2
-    args:  
-      executable: /bin/bash
+  become: true
+  npm:
+    name: pm2
+    global: yes
+    production: yes
+    state: present
 
        
 
