@@ -73,7 +73,7 @@ jobs:
           name: create cloudfront distro to connect to s3 bucket
           command: |
               aws cloudformation deploy \
-              template-file cloudfront.yml \
+              --template-file cloudfront.yml \
               --stack-name production-distro \
               --parameter-overrides PipelineID="my-test-server-bucket" \ # Name of the S3 bucket you created manually.
 
