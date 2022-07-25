@@ -65,17 +65,17 @@ jobs:
               return 1
             fi
       
-  create_cloudfront_distribution:
-    docker:
-      - image: amazon/aws-cli
-    steps:
-      - run: 
-          name: create cloudfront distro to connect to s3 bucket
-          command: |
-              aws cloudformation deploy \
-              --template-file cloudfront.yml \
-              --stack-name production-distro \
-              --parameter-overrides PipelineID="my-test-server-bucket" 
+  # create_cloudfront_distribution:
+  #   docker:
+  #     - image: amazon/aws-cli
+  #   steps:
+  #     - run: 
+  #         name: create cloudfront distro to connect to s3 bucket
+  #         command: |
+  #             aws cloudformation deploy \
+  #             --template-file cloudfront.yml \
+  #             --stack-name production-distro \
+  #             --parameter-overrides PipelineID="my-test-server-bucket" 
 
     # Job 1
   # Executes the bucket.yml - Deploy an S3 bucket, and interface with that bucket to synchronize the files between local and the bucket.
@@ -159,9 +159,6 @@ workflows:
   my_workflow:
     jobs:
       - configure_infractructure
-      - create_cloudfront_distribution:
-          requires: 
-            - configure_infractructure
       - smoke_test:
           requires: 
             - configure_infractructure
