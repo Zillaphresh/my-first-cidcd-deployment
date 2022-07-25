@@ -13,7 +13,10 @@
       state: latest
   - name: "install pm2"
     become: true
-      command: npm install pm2
+      shell : npm install pm2
+      args:  
+        executable: /bin/bash
+
        
 
           
