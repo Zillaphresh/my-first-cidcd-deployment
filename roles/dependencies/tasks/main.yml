@@ -14,7 +14,6 @@
   - name: "install pm2"
     become: true
       command:npm install pm2
-        global: yes
-        production: yes
-        state: present
+       
+
           
