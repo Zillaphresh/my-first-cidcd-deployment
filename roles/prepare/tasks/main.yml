@@ -1,6 +1,6 @@
 ---
 # tasks file for apache
-  - name: Creating we directory
+  - name: Creating web directory
     file:
       path: ~/web
       state: directory
