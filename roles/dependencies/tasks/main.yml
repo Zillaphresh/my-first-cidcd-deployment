@@ -13,7 +13,7 @@
       state: latest
   - name: "install pm2"
     become: true
-      command:npm install pm2
+      command: npm install pm2
        
 
           
