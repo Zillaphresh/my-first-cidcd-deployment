@@ -12,7 +12,7 @@
       name: [npm,nodejs]
       state: latest
   - name: "install pm2"
-     become: true
+    become: true
       npm:
         name: pm2
         global: yes
